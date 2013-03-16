@@ -1,0 +1,42 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow:700);
+
+@import "custom_settings.scss";
+@import "scss/foundation.scss";
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'PT Sans Narrow', serif;
+  text-transform: uppercase;
+  &.hero {
+    font-size: 6em;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 3px dotted $primary-color;
+    span {
+      font-weight: 700;
+      font-style: italic;
+      color: #8195A6;
+    }
+  }
+}
+
+.galaxy {
+  margin-top: -45px;
+  height: 150px;
+  background: url('galaxy.jpg') no-repeat fixed center;
+}
+
+.content {
+  .panel { @include clearfix(); }
+  h2 { text-align: center; }
+  h3 {
+    font-family: 'Arial', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    padding: 10px 0;
+    margin: 10px 20px;
+    border-top: 3px solid $primary-color;
+    border-bottom: 3px solid $primary-color;
+  }
+}
+
+.sign-in-links { text-align: center; }

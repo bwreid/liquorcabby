@@ -1,0 +1,7 @@
+.row
+  .large-12.columns
+    %h1 Cocktails
+    = link_to('Get Mixin\'', new_cocktail_path, :remote => true)
+#new-cocktail-form
+.all-cocktails
+  = render :partial => 'index'

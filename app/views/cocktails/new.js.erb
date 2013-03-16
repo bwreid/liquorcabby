@@ -1,0 +1,2 @@
+$('#new-cocktail-form').append('<%=j render :partial => 'form' %>').slideDown();
+autocomplete_ingredient_list('<%=j raw @ingredients.to_json %>');

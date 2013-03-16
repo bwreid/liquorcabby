@@ -1,0 +1,7 @@
+.cocktail
+  %h3= @cocktail.name
+  - @cocktail.ingredients.each do |ing|
+    %h6= ing.name
+  %p= @cocktail.description
+  = link_to('favorite', '#', :class => 'star')
+  = link_to(@cocktail.created_by, '#', :class => 'created_by')
