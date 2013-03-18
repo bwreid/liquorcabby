@@ -1,6 +1,18 @@
 class CocktailsController < ApplicationController
+  before_filter :is_user
+
   def index
     @cocktails = Cocktail.order(:name)
+  end
+
+  def favorites
+    @cocktails = @auth.cocktails - @auth.cocktails.where( created_by: @auth.id )
+    render :index
+  end
+
+  def top_rated
+    @cocktails = Cocktail.order(:rank).reverse
+    render :index
   end
 
   def show
@@ -9,18 +21,26 @@ class CocktailsController < ApplicationController
 
   def new
     @cocktail = Cocktail.new
-    @ingredients = Ingredient.all.map(&:name)
+    @ingredients = Ingredient.all.map(&:name).sort
   end
 
   def create
     @cocktail = Cocktail.new( params[:cocktail] )
-    @cocktail.created_by = 1 # SHOULD BE USER ID
+    @cocktail.shake_and_save( @auth.id, params[:tags] )
+    @cocktails = Cocktail.order(:name)
+  end
 
-    params[:tags].split(', ').each do |ingred|
-      @cocktail.ingredients << Ingredient.find_or_create_by_name( ingred )
+  def favorite
+    cocktail = Cocktail.find( params[:id] )
+    if @auth.cocktails.include?(cocktail)
+      cocktail.rank -= 1 if cocktail.created_by != @auth.id
+      cocktail.save
+      @auth.cocktails.delete(cocktail)
+    else
+      cocktail.rank += 1 if cocktail.created_by != @auth.id
+      cocktail.save
+      @auth.cocktails << cocktail
     end
-
-    @cocktail.save
     @cocktails = Cocktail.order(:name)
   end
 end

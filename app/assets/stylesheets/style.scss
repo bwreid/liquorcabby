@@ -3,40 +3,82 @@
 @import "custom_settings.scss";
 @import "scss/foundation.scss";
 
+body { border: 20px solid $body-border; padding: 10px; }
+.panel { @include clearfix(); }
+.all-cocktails { margin: 10px 0; }
+
+///////////////////////////////////
+////////// TYPOGRAPHY
+///////////////////////////////////
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'PT Sans Narrow', serif;
   text-transform: uppercase;
   &.hero {
+    color: $body-border;
+    text-shadow: -1px -1px 1px #ccc;
     font-size: 6em;
     text-align: center;
-    padding: 10px 0;
-    border-bottom: 3px dotted $primary-color;
-    span {
-      font-weight: 700;
-      font-style: italic;
-      color: #8195A6;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+///////////////////////////////////
+////////// NAV OVERRIDE
+///////////////////////////////////
+
+.top-bar {
+  background: none;
+  text-align: center;
+  & ul {
+    background: none;
+    border-top: 1px solid $body-border;
+    border-bottom: 1px solid $body-border;
+    display: inline-block;
+    & li a:not(.button) {
+      background: none;
+      color: lighten($body-font-color, 30%);
+      font-weight: 400;
+      text-transform: uppercase;
+      &:hover {
+        background: $body-border;
+        color: darken($body-font-color, 20%);
+        font-weight: 600;
+      }
     }
   }
+  .center { margin: 0 auto; }
 }
 
-.galaxy {
-  margin-top: -45px;
-  height: 150px;
-  background: url('galaxy.jpg') no-repeat fixed center;
-}
+///////////////////////////////////
+////////// IMAGE CROPPING
+///////////////////////////////////
 
-.content {
-  .panel { @include clearfix(); }
-  h2 { text-align: center; }
-  h3 {
-    font-family: 'Arial', sans-serif;
-    font-weight: 400;
-    text-align: center;
-    padding: 10px 0;
-    margin: 10px 20px;
-    border-top: 3px solid $primary-color;
-    border-bottom: 3px solid $primary-color;
+.image-crop {
+  width: 100%;
+  height: auto;
+  border: 20px solid $body-border;
+  overflow: hidden;
+  img {
+    width: 100%;
   }
 }
 
-.sign-in-links { text-align: center; }
+.ui-autocomplete {
+  max-height: 100px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}
+
+.favorited { color: $secondary-color; }
+#homelinks { text-align: center; }
+
+
+.cocktail-info {
+  height: 180px;
+  text-align: center;
+  position: relative;
+  top: 0;
+}

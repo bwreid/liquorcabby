@@ -1,10 +1,58 @@
 $(function() {
   $('#new-cocktail-form').hide();
+  $('.cocktail-info').on('click', '.foundicon-star', favorite_cocktail);
+  resize_window();
+  // $('.cocktail-info').hide();
+  // $('.cocktail-wrap').on('mouseenter','.image-crop', show_cocktail_recipe);
+  // $('.cocktail-wrap').on('mouseenter','.cocktail-info', function(){ return false; });
+  // $('.cocktail-wrap').on('mouseleave','.image-crop', cocktail_hide_info);
 });
+
+function resize_window() {
+  var height = $(window).height();
+  $('body').css('min-height', height);
+}
+
+
+/// FAVORITE A COCKTAIL
+function favorite_cocktail() {
+  if($(this).hasClass('favorited')) {
+    $(this).removeClass('favorited');
+    var num = $(this).parent().prev().text();
+    var newnum = (parseInt(num.replace('Rank: ','')) - 1);
+    $(this).parent().prev().text('Rank: ' + newnum);
+  } else {
+    $(this).addClass('favorited');
+    var num = $(this).parent().prev().text();
+    var newnum = (parseInt(num.replace('Rank: ','')) + 1);
+    $(this).parent().prev().text('Rank: ' + newnum);
+  }
+
+}
+
+/// SHOW COCKTAIL DETAILS ON HOVER
+
+function show_cocktail_recipe() {
+  var box_height = $(this).parent().height();
+  box_height = box_height - (box_height/4);
+  $(this).parent().children('img').animate({opacity:0.3}, 'fast');
+  $(this).parent().children('.cocktail-info').animate({top:-box_height}, 0, function(){$(this).fadeIn('fast');});
+}
+
+function cocktail_hide_info() {
+  var box_height = $(this).parent().height();
+  box_height = box_height + (box_height/4);
+  $(this).parent().children('img').animate({opacity:1}, 'fast');
+  $(this).parent().children('.cocktail-info').animate({top:+box_height}, 0, function(){$(this).fadeOut('fast');});
+}
+
+/// CLOSE COCKTAIL FORM
 
 function close_new_cocktail_form() {
   $('#new-cocktail-form').slideUp( 400, function() {$('#new-cocktail-form').empty();} );
 }
+
+/// AUTOCOMPLETE MAGIC
 
 function autocomplete_ingredient_list(availableTags) {
   var availableTags = eval(availableTags);

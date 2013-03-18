@@ -1,0 +1,21 @@
+<nav class="top-bar">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+
+    <!-- Right Nav Section -->
+    <ul class="center">
+      <% if @auth %>
+      <li><%= link_to( 'Cocktails', cocktails_path ) %>
+      <li><%= link_to( 'Top Rated', top_rated_cocktails_path ) %>
+      <li><%= link_to( 'My Favorites', favorites_cocktails_path ) %>
+      <li><%= link_to( 'My Account', @auth ) %>
+      <li><%= link_to("Logout", login_path, :method => 'delete' ) %>
+      <% end %>
+    </ul>
+  </section>
+</nav>

@@ -1,7 +1,9 @@
-.cocktail
-  %h3= @cocktail.name
-  - @cocktail.ingredients.each do |ing|
-    %h6= ing.name
-  %p= @cocktail.description
-  = link_to('favorite', '#', :class => 'star')
-  = link_to(@cocktail.created_by, '#', :class => 'created_by')
+.row
+  .cocktail
+    %h3{ style: 'margin-left: 20px;' }= "#{@cocktail.name} - Rank: #{@cocktail.rank}"
+    .large-4.columns
+      = image_tag(@cocktail.image, class: 'image-crop')
+    .large-8.columns
+      - @cocktail.ingredients.each do |ing|
+        %h6= ing.name
+      %p= @cocktail.description

@@ -1,0 +1,9 @@
+.row
+  .large-12.columns
+    = form_tag '/login' do
+      = label_tag :email
+      = text_field_tag :email
+      = label_tag :password
+      = password_field_tag :password
+      = button_to_function('Cancel', 'cancel_login_form()')
+      = submit_tag 'Start Drinking', :class => 'button tiny radius success'

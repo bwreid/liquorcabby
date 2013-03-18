@@ -1,0 +1,5 @@
+.row
+  .large-12.columns
+    %h1= @user == @auth ? "Hello, #{@user.name}." : "#{@user.name}'s Cocktails"
+    %h3 Created by You
+    = render :partial => 'cocktails/index'

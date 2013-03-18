@@ -1,0 +1,5 @@
+- if xyz.errors.any?
+  .alert-box.alert
+    = "#{pluralize(xyz.errors.count, 'error')} in this form:"
+    - xyz.errors.full_messages.each do |error|
+      %br= error

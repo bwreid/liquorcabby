@@ -1,7 +1,16 @@
 - @cocktails.each do |cl|
-  .cocktail
-    %h3= link_to(cl.name, cl)
-    - cl.ingredients.each do |ing|
-      %h6= ing.name
-    = link_to('favorite', '#', :class => 'star')
-    = link_to(cl.created_by, '#', :class => 'created_by')
+  .cocktail-wrap
+    .large-4.columns.cocktail
+      = image_tag(cl.image, :class => 'image-crop')
+      .cocktail-info
+        %h3= link_to(cl.name, cl)
+        %p= "Rank: #{cl.rank}"
+        - if @auth.id != cl.created_by
+          %a{ href: favorite_cocktail_path(cl), 'data-method' => 'POST', 'data-remote' => true }
+            - if @auth.cocktails.include?(cl)
+              %i{ :class => 'foundicon-star favorited' }
+            - else
+              %i{ :class => 'foundicon-star' }
+        %p{ :class => 'created_by' }
+          = "Created by"
+          = link_to(User.find(cl.created_by).name, User.find(cl.created_by))

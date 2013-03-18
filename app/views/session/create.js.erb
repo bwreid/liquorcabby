@@ -1,0 +1,6 @@
+<% if session[:user_id].present? %>
+  hide_login_register_links();
+  $('.navbar').append('<%=j render(:partial => 'logout_link') %>');
+<% else %>
+  $('#form').empty().append('<%=j render(:partial => "new", :locals => { :user => @user }) %>');
+<% end %>

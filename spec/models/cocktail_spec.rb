@@ -9,6 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  rank        :integer          default(0)
+#  image       :string(255)      default("/assets/default.jpg")
 #
 
 require 'spec_helper'
